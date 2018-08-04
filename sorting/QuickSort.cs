@@ -12,7 +12,9 @@ namespace sorting
         private void Sort(int[] array, int start, int end) 
         {
             if(start < end) {
-                int pivotIndex = Partition(array, start, end);
+                int mid = (start + end) / 2;
+                int pivot = array[mid];
+                int pivotIndex = Partition(array, start, end, pivot);
                 // Sort(array, start, pivotIndex - 1);
                 // Sort(array, pivotIndex + 1, end);
                 Sort(array, start, pivotIndex - 1);
@@ -20,17 +22,14 @@ namespace sorting
             }
         }
 
-        private int Partition(int[] array, int left, int right)
+        private int Partition(int[] array, int left, int right, int pivot)
         {
-            int mid = (left + right) / 2;
-            int pivot = array[mid];
-
             while(left <= right)
             {
                 while(array[left] < pivot) left++;
-                while(array[right] > pivot) right++;
+                while(array[right] > pivot) right--;
 
-                if(left < right) {
+                if(left <= right) {
                     Swap(array, left, right);
                     left++; right--;
                 }
