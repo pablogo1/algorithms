@@ -14,8 +14,8 @@ namespace sorting
             }
 
             int mid = n / 2;
-            int[] left = ArrayUtil.CopyArray(array, 0, mid - 1);
-            int[] right = ArrayUtil.CopyArray(array, mid, n - 1);
+            int[] left = ArrayExtensions.Copy(array, 0, mid - 1);
+            int[] right = ArrayExtensions.Copy(array, mid, n - 1);
             Sort(left);
             Sort(right);
             Merge(left, right, array);
@@ -28,16 +28,22 @@ namespace sorting
                 throw new ArgumentOutOfRangeException();
 
             int k = 0, i = 0, j = 0;
+            // Iterate both left and right arrays
+            // Using i as an index for left and j for right arrays
             while(i < left.Length && j < right.Length) {
+                //Compare elements from left and right arrays, if left array is greater or equal to right array element,
+                // copy left item into destination array. Otherwise, copy the right item into destination array.
                 if(left[i] <= right[j]) {
                     array[k++] = left[i++];
                 } else {
                     array[k++] = right[j++];
                 }
             }
+            //Are there any remaining items on left array, copy all of them into array
             while(i < left.Length) {
                 array[k++] = left[i++];
             }
+            //Do the same for righ array.
             while(j < right.Length) {
                 array[k++] = right[j++];
             }
