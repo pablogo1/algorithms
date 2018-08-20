@@ -1,28 +1,74 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace Trees
 {
-    public class Tree
+    public enum TraverseOrder
     {
-        private Node _head;
+        InOrder,
+        PreOrder,
+        PostOrder
+    }
+
+    public class Tree<T> 
+        where T: IComparable<T>
+    {
+        private Node<T> _root;
 
         public Tree() : this(null) {}
 
-        public Tree(int headData) : this(new Node(headData)) {}
+        public Tree(T rootData) : this(new Node<T>(rootData)) {}
 
-        public Tree(Node head)
+        internal Tree(Node<T> root)
         {
-            _head = head;
+            _root = root;
         }
 
-        public void Insert(int data)
-        {
-            CreateNewHeadIfNull(data);
+        public bool IsEmpty => _root == null;
 
-            _head.Insert(data);
+        public void Insert(T data)
+        {
+            CreateNewRootIfNull(data);
+
+            _root.Insert(data);
         }
 
-        private void CreateNewHeadIfNull(int data) {
-            if(_head == null) {
-                _head = new Node(data);
+        public IEnumerable<T> Traverse()
+        {
+            return Traverse(TraverseOrder.InOrder);
+        }
+
+        public IEnumerable<T> Traverse(TraverseOrder order)
+        {
+            if(_root == null)
+                throw new InvalidOperationException(); 
+
+            var traversal = default(IEnumerable<T>);
+
+            switch(order) 
+            {
+                case TraverseOrder.InOrder:
+                    traversal = _root.TraverseInOrder();
+                    break;
+                case TraverseOrder.PostOrder:
+                    traversal = _root.TraversePostOrder();
+                    break;
+                case TraverseOrder.PreOrder:
+                    traversal = _root.TraversePreOrder();
+                    break;
+            }
+
+            return traversal;
+        }
+
+        internal Node<T> Root => _root;
+        
+        private void CreateNewRootIfNull(T data) 
+        {
+            if(_root == null) 
+            {
+                _root = new Node<T>(data);
             }
         }
     }
