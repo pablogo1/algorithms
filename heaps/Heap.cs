@@ -2,63 +2,33 @@ using System;
 
 namespace Heaps
 {
-    public class MinHeap
+    public abstract class Heap
     {
         private int _capacity;
         private int _size;
         private int[] _items;
 
-        public MinHeap()
-            : this(10)
-        {}
+        public Heap() : this(10) {}
 
-        public MinHeap(int capacity) 
+        public Heap(int initialCapacity) 
         {
-            _capacity = capacity;
+            _capacity = initialCapacity;
             _size = 0;
-
             _items = new int[_capacity];
         }
 
-        public int Peek() 
-        {
-            if(IsEmpty) 
-            {
-                throw new InvalidOperationException();
-            }
+        protected int Capacity => _capacity;
+        protected int Size => _size;
+        protected int[] Items => _items;
 
-            return _items[0];
-        }
-
-        public int Poll() 
-        {
-            if(IsEmpty) 
-            {
-                throw new InvalidOperationException();
-            }
-            
-            int item = _items[0];
-            _items[0] = _items[_size - 1];
-            _size--;
-            HeapifyDown();
-            
-            return item;
-        }
-
-        public void Add(int item)
-        {
-            EnsureCapacity();
-
-            _items[_size] = item;
-            _size++;
-            HeapifyUp();
-        }
+        protected bool IsEmpty => _size == 0;
+        
+        protected abstract bool Compare(int a, int b);
 
         private int GetLeftChildIndex(int parentIndex) => 2 * parentIndex + 1;
         private int GetRightChildIndex(int parentIndex) => 2 * (parentIndex + 1);
         private int GetParentIndex(int childIndex) => (childIndex - 1) / 2;
 
-        private bool IsEmpty => _size == 0;
         private bool HasLeftChild(int index) => GetLeftChildIndex(index) < _size;
         private bool HasRightChild(int index) => GetRightChildIndex(index) < _size;
         private bool HasParent(int index) => GetParentIndex(index) >= 0;
@@ -79,17 +49,15 @@ namespace Heaps
             if(_size == _capacity) 
             {
                 _capacity *= 2;
-                int[] temp = new int[_capacity];
-                _items.CopyTo(temp, 0);
-                _items = temp;
+                Array.Resize(ref _items, _capacity);
             }
-        
         }
 
         private void HeapifyUp()
         {
             int index = _size - 1;
-            while(HasParent(index) && GetParent(index) > _items[index]) 
+            // while(HasParent(index) && GetParent(index) > _items[index]) 
+            while(HasParent(index) && !Compare(GetParent(index), _items[index]))
             {
                 Swap(index, GetParentIndex(index));
                 index = GetParentIndex(index);
@@ -101,12 +69,14 @@ namespace Heaps
             while(HasLeftChild(index)) 
             {
                 int childIndex = GetLeftChildIndex(index);
-                if(HasRightChild(index) && GetRightChild(index) < GetLeftChild(index)) 
+                // if(HasRightChild(index) && GetRightChild(index) < GetLeftChild(index)) 
+                if(HasRightChild(index) && Compare(GetRightChild(index), GetLeftChild(index))) 
                 {
                     childIndex = GetRightChildIndex(index);
                 }
 
-                if(_items[index] < _items[childIndex]) 
+                // if(_items[index] < _items[childIndex]) 
+                if(Compare(_items[index], _items[childIndex])) 
                 {
                     break;
                 } 
