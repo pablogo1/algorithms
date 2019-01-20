@@ -1,31 +1,25 @@
-using System;
-using System.Collections;
+﻿using System;
+using Trees;
 
-namespace Trees
+namespace trees
 {
     public static class TreeExtensions
     {
-        public static bool CheckBst(this Tree<int> tree)
+        public static int Height<T>(this Tree<T> tree)
+            where T : IComparable<T>
         {
-            if(tree == null || tree.IsEmpty) {
-                return true;
-            }
-
-            return tree.Root.CheckBst();
+            return Height(tree.Root);
         }
 
-        private static bool CheckBst(this Node<int> node)
+        private static int Height<T>(Node<T> root)
+            where T : IComparable<T>
         {
-            return CheckBst(node, Int32.MinValue, Int32.MaxValue);
-        }
+            if (root == null) return 0;
 
-        private static bool CheckBst(Node<int> node, int min, int max)
-        {
-            if(node == null) return true;
-            if(node.Data < min || node.Data > max)
-                return false;
-            
-            return CheckBst(node.Left, min, node.Data) && CheckBst(node.Right, node.Data, max);
+            var leftHeight = Height(root.Left);
+            var rightHeight = Height(root.Right);
+
+            return Math.Max(leftHeight, rightHeight) + 1;
         }
     }
 }

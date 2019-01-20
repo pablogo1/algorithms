@@ -29,7 +29,11 @@ namespace Trees
 
         public void Insert(T data)
         {
-            CreateNewRootIfNull(data);
+            if (_root == null)
+            {
+                _root = new Node<T>(data);
+                return;
+            }
 
             _root.Insert(data);
         }
@@ -63,13 +67,5 @@ namespace Trees
         }
 
         internal Node<T> Root => _root;
-        
-        private void CreateNewRootIfNull(T data) 
-        {
-            if(_root == null) 
-            {
-                _root = new Node<T>(data);
-            }
-        }
     }
 }
