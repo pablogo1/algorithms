@@ -16,4 +16,20 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="testCase1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="testCase1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="testCase4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="testCase7.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
