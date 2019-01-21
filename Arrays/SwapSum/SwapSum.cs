@@ -12,7 +12,7 @@ namespace Arrays.SwapSum
             var sumA = arrayA.Sum();
             var sumB = arrayB.Sum();
 
-            if(sumA == sumB) return false;
+            if(sumA == sumB) return true;
             if((sumA - sumB) % 2 != 0) return false;
 
             var diff = (sumA - sumB) / 2;
