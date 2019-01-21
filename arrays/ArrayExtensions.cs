@@ -1,6 +1,6 @@
 using System;
 
-namespace arrays
+namespace Arrays
 {
     public static class ArrayExtensions
     {

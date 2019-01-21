@@ -1,4 +1,4 @@
-namespace arrays.sorting
+namespace Arrays.Sorting
 {
     class QuickSortA : QuickSortBase
     {

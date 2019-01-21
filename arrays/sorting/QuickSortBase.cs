@@ -1,6 +1,6 @@
 using System;
 
-namespace arrays.sorting
+namespace Arrays.Sorting
 {
     abstract class QuickSortBase : ISorter
     {

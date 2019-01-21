@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace arrays.sorting
+namespace Arrays.Sorting
 {
     public class SortingTests
     {   
