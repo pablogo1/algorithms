@@ -1,6 +1,6 @@
 using System;
 
-namespace sorting
+namespace arrays
 {
     public static class ArrayExtensions
     {

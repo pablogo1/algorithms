@@ -3,5 +3,8 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"dotnet-test-explorer.testProjectPath": "arrays/arrays.Tests.csproj"
+	}
 }

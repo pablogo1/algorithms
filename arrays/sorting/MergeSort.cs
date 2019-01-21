@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace sorting
+namespace arrays.sorting
 {
     class MergeSort : ISorter
     {

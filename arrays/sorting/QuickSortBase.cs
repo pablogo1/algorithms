@@ -1,6 +1,6 @@
 using System;
 
-namespace sorting
+namespace arrays.sorting
 {
     abstract class QuickSortBase : ISorter
     {

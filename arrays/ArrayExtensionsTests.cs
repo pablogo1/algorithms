@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace sorting
+namespace arrays
 {
     public class ArrayExtensionsTests
     {

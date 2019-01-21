@@ -1,4 +1,4 @@
-namespace sorting
+namespace arrays.sorting
 {
     public interface ISorter
     {
