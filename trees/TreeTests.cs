@@ -113,6 +113,23 @@ namespace Trees
                     i => Assert.Equal(25, i)
                 );
             }
+
+            [Fact]
+            public void ShouldTraverseTreeInLevelOrder_WhenTraverseOrderIsInLevelOrder()
+            {
+                //When
+                var items = _tree.Traverse(TraverseOrder.LevelOrder);
+                
+                //Then
+                Assert.Collection(items,
+                    i => Assert.Equal(10, i),
+                    i => Assert.Equal(5, i),
+                    i => Assert.Equal(20, i),
+                    i => Assert.Equal(3, i),
+                    i => Assert.Equal(9, i),
+                    i => Assert.Equal(25, i)
+                );
+            }
         }
     }
 }

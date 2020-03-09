@@ -5,7 +5,9 @@
 		}
 	],
 	"settings": {
-		"dotnet-test-explorer.testProjectPath": "Arrays/arrays.Tests.csproj",
-		"dotnet-test-explorer.useTreeView": false
+		"dotnet-test-explorer.testProjectPath": "trees/trees.csproj",
+		"dotnet-test-explorer.useTreeView": true,
+		"dotnet-test-explorer.addProblems": true,
+		"dotnet-test-explorer.autoWatch": true
 	}
 }

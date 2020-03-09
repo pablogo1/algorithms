@@ -77,5 +77,24 @@ namespace Trees
 
             return list;
         }
+
+        internal IEnumerable<T> TraverseLevelOrder()
+        {
+            var queue = new Queue<Node<T>>();
+            var list = new List<T>();
+
+            queue.Enqueue(this);
+
+            while(queue.Count > 0) 
+            {
+                var currentNode = queue.Dequeue();
+                list.Add(currentNode.Data);
+
+                if(currentNode.Left != null) queue.Enqueue(currentNode.Left);
+                if(currentNode.Right != null) queue.Enqueue(currentNode.Right);
+            }
+
+            return list;
+        }
     }
 }

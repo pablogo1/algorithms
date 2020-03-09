@@ -8,7 +8,8 @@ namespace Trees
     {
         InOrder,
         PreOrder,
-        PostOrder
+        PostOrder,
+        LevelOrder
     }
 
     public class Tree<T> 
@@ -60,6 +61,9 @@ namespace Trees
                     break;
                 case TraverseOrder.PreOrder:
                     traversal = _root.TraversePreOrder();
+                    break;
+                case TraverseOrder.LevelOrder:
+                    traversal = _root.TraverseLevelOrder();
                     break;
             }
 

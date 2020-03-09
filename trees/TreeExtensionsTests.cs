@@ -94,5 +94,24 @@ namespace Trees
                 Assert.Equal(3, _tree.Height());
             }
         }
+
+        public class PrintTests
+        {
+            private readonly Tree<int> _tree = new Tree<int>();
+
+            [Fact]
+            public void PrintTest()
+            {
+                _tree.Insert(10);
+                _tree.Insert(5);
+                _tree.Insert(20);
+                _tree.Insert(15);
+                _tree.Insert(25);
+                _tree.Insert(3);
+                _tree.Insert(9);
+
+                _tree.Print();
+            }
+        }
     }
 }
