@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"dotnet-test-explorer.testProjectPath": "trees/trees.csproj",
+		"dotnet-test-explorer.testProjectPath": "algorithms.sln",
 		"dotnet-test-explorer.useTreeView": true,
 		"dotnet-test-explorer.addProblems": true,
 		"dotnet-test-explorer.autoWatch": true

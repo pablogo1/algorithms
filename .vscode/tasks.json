@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/sorting/sorting.csproj"
+                "${workspaceFolder}/algorithms.sln"
             ],
             "problemMatcher": "$msCompile"
         }
