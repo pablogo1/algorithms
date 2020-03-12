@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+
 namespace Problems.Atoi
 {
     public class Solution
@@ -23,60 +26,46 @@ namespace Problems.Atoi
             // let's define INT_MAX and INT_MIN
             const int INT_MAX = Int32.MaxValue;
             const int INT_MIN = Int32.MinValue;
-            // let's define valid digits: 0-9
-            // let's define valid chars: +,-
-            // remove whitespaces
 
-            int isPositive = 0;
-            Stack stack = new Stack();
+            if (str.Length == 0)
+            {
+                return 0;
+            }
+
+            int sign = 1;
             int i = 0;
             int result = 0;
 
             // discard as many whitespaces are found.
-            while (str[i] == ' ' && i < str.Length) i++;
+            while (i < str.Length && str[i] == ' ') i++;
+
+            if (i < str.Length && (str[i] == '-' || str[i] == '+'))
+            {
+                sign = str[i] == '-' ? -1 : 1;
+                i++;
+            }
+            // discard as many leading zeroes are found
+            while (i < str.Length && str[i] == '0') i++;
 
             while (i < str.Length)
             {
-                if (str[i] == '+' || str[i] == '-')
+                if (str[i] >= '0' && str[i] <= '9')
                 {
-                    if (isPositive == 0)
+                    if (result > (INT_MAX / 10))
                     {
-                        isPositive = str[i] == '+' ? 1 : -1;
+                        return sign == -1 ? INT_MIN : INT_MAX;
                     }
-                    else
-                    {
-                        Console.WriteLine($"Conversion is not valid. Current i = {i}; str[i] = {str[i]}");
-                        return 0; // conversion is not valid.
-                    }
-                    i++;
-                    continue;
-                }
-                // discard as many leading zeroes are found
-                while (str[i] == '0' && i < str.Length) i++;
-
-                if (str[i] >= 48 && str[i] <= 57)
-                { //ascii codes for '0' and '9'
-                    stack.Push(str[i] - 48);
-                }
+                    result = result * 10 + str[i] - '0';
+                } 
                 else
                 {
                     break;
                 }
+
                 i++;
             }
 
-            int decimalPlace = 0;
-            while (stack.Count > 0)
-            {
-                result += Convert.ToInt32(stack.Pop()) * (int)Math.Pow(10, decimalPlace);
-                if (result > INT_MAX) return INT_MAX;
-                if (result < INT_MIN) return INT_MIN;
-                decimalPlace++;
-            }
-            isPositive = isPositive == 0 ? 1 : isPositive;
-            result *= isPositive;
-
-            return result;
+            return result * sign;
         }
     }
 }
