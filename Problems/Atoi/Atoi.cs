@@ -51,12 +51,12 @@ namespace Problems.Atoi
             {
                 if (str[i] >= '0' && str[i] <= '9')
                 {
-                    if (result > (INT_MAX / 10))
+                    if (result > (INT_MAX / 10) || (result == INT_MAX / 10 && str[i] - '0' > 7))
                     {
                         return sign == -1 ? INT_MIN : INT_MAX;
                     }
-                    result = result * 10 + str[i] - '0';
-                } 
+                    result = (result * 10) + str[i] - '0';
+                }
                 else
                 {
                     break;
@@ -67,5 +67,38 @@ namespace Problems.Atoi
 
             return result * sign;
         }
+
+        public int MyAtoi2(string str)
+        {
+            return MyAtoiRecursive(str, str.Length - 1);
+        }
+
+        private int MyAtoiRecursive(string str, int i)
+        {
+            int sign = 0;
+            
+            if (str[i] == '+' || str[i] == '-')
+            {
+                sign = str[i] == '-' ? -1 : 1;
+                return (str[i + 1] - '0');
+            }
+            if (i == 0)
+                return 0;
+
+            if (IsDigit(str[i]))
+            {
+                int result = (10 * MyAtoiRecursive(str, i - 1) + str[i] - '0');
+                return result * sign;
+            }
+            
+            return MyAtoiRecursive(str, i - 1);
+            
+
+            //int result = (10 * MyAtoiRecursive(str, i - 1) + str[i] - '0');
+            //return result;
+            //return result * sign;
+        }
+
+        private bool IsDigit(char chr) => chr >= '0' && chr <= '9';
     }
 }

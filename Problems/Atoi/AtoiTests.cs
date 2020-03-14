@@ -21,6 +21,7 @@ namespace Problems.Atoi
         [InlineData("  ", 0)]
         [InlineData("2147483646", 2147483646)]
         [InlineData("-2147483646", -2147483646)]
+        [InlineData("2147483648", Int32.MaxValue)]
         public void MyAtoiTests(string input, int expected)
         {
             var solution = new Solution();
