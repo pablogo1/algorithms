@@ -8,6 +8,9 @@
 		"dotnet-test-explorer.testProjectPath": "algorithms.sln",
 		"dotnet-test-explorer.useTreeView": true,
 		"dotnet-test-explorer.addProblems": true,
-		"dotnet-test-explorer.autoWatch": true
+		"dotnet-test-explorer.autoWatch": true,
+		"dotnetCoreExplorer.searchpatterns": [
+			"**/bin/**/*.{dll,exe}"
+		]
 	}
 }
