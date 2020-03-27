@@ -9,19 +9,33 @@ namespace Problems.MergeLists
         public SinglyLinkedListNode Head { get; private set; } = null;
         public SinglyLinkedListNode Tail { get; private set; } = null;
 
-        public void InsertNode(int nodeData)
+        public int Count { get; private set; } = 0;
+
+        public void Append(int nodeData)
         {
             var newNode = new SinglyLinkedListNode(nodeData);
 
             if (Head == null)
             {
-                newNode = Head;
+                Head = newNode;
             } else
             {
                 Tail.Next = newNode;
             }
 
             Tail = newNode;
+            Count++;
+        }
+
+        public void Prepend(int nodeData)
+        {
+            var newNode = new SinglyLinkedListNode(nodeData);
+
+        }
+
+        public SinglyLinkedListNode RemoveLast()
+        {
+            throw new NotImplementedException();
         }
 
         public override bool Equals(object other)
@@ -63,7 +77,7 @@ namespace Problems.MergeLists
 
             foreach (int item in array)
             {
-                newList.InsertNode(item);
+                newList.Append(item);
             }
 
             return newList;

@@ -10,25 +10,25 @@
             {
                 if (head1 != null && head1.Data <= head2.Data)
                 {
-                    resultList.InsertNode(head1.Data);
+                    resultList.Append(head1.Data);
                     head1 = head1.Next;
                 } 
                 else if (head2 != null)
                 {
-                    resultList.InsertNode(head2.Data);
+                    resultList.Append(head2.Data);
                     head2 = head2.Next;
                 }
             }
 
             while (head1 != null)
             {
-                resultList.InsertNode(head1.Data);
+                resultList.Append(head1.Data);
                 head1 = head1.Next;
             }
 
             while (head2 != null)
             {
-                resultList.InsertNode(head2.Data);
+                resultList.Append(head2.Data);
                 head2 = head2.Next;
             }
 
