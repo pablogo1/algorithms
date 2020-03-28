@@ -33,6 +33,11 @@ namespace Problems.MergeLists
 
         }
 
+        public SinglyLinkedListNode RemoveFirst()
+        {
+            throw new NotImplementedException();
+        }
+
         public SinglyLinkedListNode RemoveLast()
         {
             throw new NotImplementedException();
