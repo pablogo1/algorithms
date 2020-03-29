@@ -30,12 +30,14 @@ namespace Problems.MergeLists
 
             linkedList.Head.Should().NotBeNull();
             linkedList.Tail.Should().NotBeNull();
+            linkedList.PreviousTail.Should().BeNull();
             linkedList.Head.Data.Should().Be(1);
             linkedList.Tail.Data.Should().Be(1);
 
             linkedList.Append(10);
             linkedList.Head.Data.Should().Be(1);
             linkedList.Tail.Data.Should().Be(10);
+            linkedList.PreviousTail.Should().BeSameAs(linkedList.Head);
         }
 
         [Fact(DisplayName = "Append_Should_Increment_Count_By_One")]
@@ -54,12 +56,19 @@ namespace Problems.MergeLists
 
             linkedList.Head.Should().NotBeNull();
             linkedList.Tail.Should().NotBeNull();
+            linkedList.PreviousTail.Should().BeNull();
             linkedList.Head.Data.Should().Be(1);
             linkedList.Tail.Data.Should().Be(1);
 
             linkedList.Prepend(10);
             linkedList.Head.Data.Should().Be(10);
             linkedList.Tail.Data.Should().Be(1);
+            linkedList.PreviousTail.Should().BeSameAs(linkedList.Head);
+
+            linkedList.Prepend(29);
+            linkedList.Head.Data.Should().Be(29);
+            linkedList.Tail.Data.Should().Be(1);
+            linkedList.PreviousTail.Data.Should().Be(10);
         }
 
         [Fact(DisplayName = "Prepend_Should_Increment_Count_By_One")]
@@ -115,6 +124,17 @@ namespace Problems.MergeLists
             linkedList.Tail.Should().BeSameAs(linkedList.Head);
         }
 
+        [Fact(DisplayName = "RemoveLast_Should_Decrement_Count_By_One")]
+        public void RemoveLast_Should_Decrement_Count_By_One()
+        {
+            linkedList.Append(1);
+            linkedList.Append(2);
+
+            var removedNode = linkedList.RemoveLast();
+
+            linkedList.Count.Should().Be(1);
+        }
+
         [Fact(DisplayName = "RemoveFirst_Should_Return_And_Remove_The_First_Node")]
         public void RemoveFirst_Should_Return_And_Remove_The_First_Node()
         {
@@ -127,9 +147,46 @@ namespace Problems.MergeLists
             removedNode.Should().NotBeNull();
             removedNode.Data.Should().Be(1);
             linkedList.Head.Should().NotBeNull();
+            linkedList.Head.Data.Should().Be(2);
+            linkedList.Head.Should().NotBeSameAs(linkedList.Tail);
         }
 
-        //[Fact]
-        //public void RemoveLast_Should_Return_And_Remove
+        [Fact(DisplayName = "RemoveFirst_Should_Set_Head_And_Tail_The_Same_When_List_Has_Two_Nodes")]
+        public void RemoveFirst_Should_Set_Head_And_Tail_The_Same_When_List_Has_Two_Nodes()
+        {
+            linkedList.Append(1);
+            linkedList.Append(2);
+
+            var removedNode = linkedList.RemoveFirst();
+
+            removedNode.Should().NotBeNull();
+            removedNode.Data.Should().Be(1);
+            linkedList.Head.Should().BeSameAs(linkedList.Tail);
+            linkedList.Head.Next.Should().BeNull();
+        }
+
+        [Fact(DisplayName = "RemoveFirst_Shoud_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node")]
+        public void RemoveFirst_Should_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node()
+        {
+            linkedList.Append(1);
+
+            var removedNode = linkedList.RemoveFirst();
+
+            removedNode.Should().NotBeNull();
+            removedNode.Data.Should().Be(1);
+            linkedList.Head.Should().BeNull();
+            linkedList.Tail.Should().BeSameAs(linkedList.Head);
+        }
+
+        [Fact(DisplayName = "RemoveFirst_Should_Decrement_Count_By_One")]
+        public void RemoveFirst_Should_Decrement_Count_By_One()
+        {
+            linkedList.Append(1);
+            linkedList.Append(2);
+
+            var removedNode = linkedList.RemoveFirst();
+
+            linkedList.Count.Should().Be(1);
+        }
     }
 }

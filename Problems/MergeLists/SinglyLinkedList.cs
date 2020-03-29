@@ -8,6 +8,7 @@ namespace Problems.MergeLists
     {
         public SinglyLinkedListNode Head { get; private set; } = null;
         public SinglyLinkedListNode Tail { get; private set; } = null;
+        public SinglyLinkedListNode PreviousTail { get; set; } = null;
 
         public int Count { get; private set; } = 0;
 
@@ -20,6 +21,7 @@ namespace Problems.MergeLists
                 Head = newNode;
             } else
             {
+                PreviousTail = Tail;
                 Tail.Next = newNode;
             }
 
@@ -29,18 +31,46 @@ namespace Problems.MergeLists
 
         public void Prepend(int nodeData)
         {
-            var newNode = new SinglyLinkedListNode(nodeData);
+            var newNode = new SinglyLinkedListNode(nodeData)
+            {
+                Next = Head
+            };
 
+            if (Tail == null)
+            {
+                Tail = newNode;
+            }
+            else if (newNode.Next == Tail)
+            {
+                PreviousTail = newNode;
+            }
+            Head = newNode;
+            Count++;
         }
 
         public SinglyLinkedListNode RemoveFirst()
         {
-            throw new NotImplementedException();
+            var currentHead = Head;
+            if (Tail == currentHead)
+            {
+                Tail = null;
+            }
+            Head = Head?.Next;
+            Count--;
+
+            return currentHead;
         }
 
         public SinglyLinkedListNode RemoveLast()
         {
-            throw new NotImplementedException();
+            var currentNode = Head;
+            SinglyLinkedListNode prevNode = null;
+            while (currentNode.Next != null) currentNode = currentNode.Next;
+
+            if (Head == Tail)
+            {
+
+            }
         }
 
         public override bool Equals(object other)
