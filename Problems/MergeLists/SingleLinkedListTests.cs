@@ -111,7 +111,7 @@ namespace Problems.MergeLists
             linkedList.Head.Next.Should().BeNull();
         }
 
-        [Fact(DisplayName = "RemoveLast_Shoud_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node" )]
+        [Fact(DisplayName = "RemoveLast_Should_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node" )]
         public void RemoveLast_Should_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node()
         {
             linkedList.Append(1);

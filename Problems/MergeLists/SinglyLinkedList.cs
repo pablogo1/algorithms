@@ -64,13 +64,17 @@ namespace Problems.MergeLists
         public SinglyLinkedListNode RemoveLast()
         {
             var currentNode = Head;
-            SinglyLinkedListNode prevNode = null;
-            while (currentNode.Next != null) currentNode = currentNode.Next;
+            while (currentNode?.Next?.Next != null) currentNode = currentNode.Next;
 
-            if (Head == Tail)
+            var lastNode = Tail == currentNode ? currentNode : currentNode.Next;
+            Tail = currentNode;
+            if (Tail == null)
             {
-
+                Head = null;
             }
+            currentNode.Next = null;
+
+            return lastNode;
         }
 
         public override bool Equals(object other)
