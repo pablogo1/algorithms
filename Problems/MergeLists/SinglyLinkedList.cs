@@ -116,11 +116,16 @@ namespace Problems.MergeLists
 
         public override int GetHashCode()
         {
-            return 7 ^ Head.GetHashCode() ^ Tail.GetHashCode();
+            return 7 ^ Count ^ Head.GetHashCode() ^ Tail.GetHashCode();
         }
 
         public static SinglyLinkedList FromArray(int[] array)
         {
+            if (array is null)
+            {
+                throw new ArgumentNullException(nameof(array));
+            }
+
             var newList = new SinglyLinkedList();
 
             foreach (int item in array)
@@ -129,6 +134,11 @@ namespace Problems.MergeLists
             }
 
             return newList;
+        }
+
+        public void Print(TextWriter textWriter, string sep = " ")
+        {
+            Print(Head, sep, textWriter);
         }
 
         public static void Print(SinglyLinkedListNode head, string sep, TextWriter textWriter)

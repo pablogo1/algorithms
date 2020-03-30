@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using FluentAssertions;
+using System.IO;
 
 namespace Problems.MergeLists
 {
@@ -21,6 +22,59 @@ namespace Problems.MergeLists
             linkedList.Head.Should().BeNull();
             linkedList.Tail.Should().BeNull(); 
             linkedList.Count.Should().Be(0);
+        }
+
+        [Fact(DisplayName = "FromArray_Returns_New_Linked_List_From_Array")]
+        public void FromArray_Returns_New_Linked_List_From_Array()
+        {
+            int[] array = { 1, 2, 3, 4 };
+
+            var actual = SinglyLinkedList.FromArray(array);
+
+            actual.Should().NotBeNull();
+            actual.Count.Should().Be(4);
+            actual.Head.Data.Should().Be(1);
+            actual.Tail.Data.Should().Be(4);
+        }
+
+        [Fact(DisplayName = "FromArray_Returns_New_Empty_Linked_List_From_Empty_Array")]
+        public void FromArray_Returns_New_Empty_Linked_List_From_Empty_Array()
+        {
+            int[] array = { };
+
+            var actual = SinglyLinkedList.FromArray(array);
+
+            actual.Should().NotBeNull();
+            actual.Count.Should().Be(0);
+            actual.Head.Should().BeNull();
+            actual.Tail.Should().BeNull();
+        }
+
+        [Fact(DisplayName = "FromArray_Throws_ArgumentNullException_When_Array_Is_Null")]
+        public void FromArray_Throws_ArgumentNullException_When_Array_Is_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                SinglyLinkedList.FromArray(null);
+            });
+        }
+
+        [Theory(DisplayName = "Print_Prints_List_To_Writer")]
+        [InlineData(new int[] { }, " ", "[]")]
+        [InlineData(new int[] { }, ",", "[]")]
+        [InlineData(new int[] { 1, 2, 3 }, " ", "[1 2 3]")]
+        [InlineData(new int[] { 1, 2, 3 }, ",", "[1,2,3]")]
+        [InlineData(new int[] { 1 }, " ", "[1]")]
+        [InlineData(new int[] { 1 }, ",", "[1]")]
+        public void Print_Prints_List_To_Writer(int[] initArray, string sep, string expected)
+        {
+            var list = SinglyLinkedList.FromArray(initArray);
+
+            using (var sw = new StringWriter())
+            {
+                list.Print(sw, sep);
+                sw.ToString().Should().Be(expected);
+            }
         }
 
         [Fact(DisplayName = "Append_Should_Insert_New_Node_At_End")]
@@ -124,6 +178,16 @@ namespace Problems.MergeLists
             linkedList.Tail.Should().BeSameAs(linkedList.Head);
         }
 
+        [Fact(DisplayName = "RemoveLast_Should_Return_Null_When_List_Is_Empty")]
+        public void RemoveLast_Should_Return_Null_When_List_Is_Empty()
+        {
+            var removedNode = linkedList.RemoveLast();
+
+            removedNode.Should().BeNull();
+            linkedList.Head.Should().BeNull();
+            linkedList.Tail.Should().BeNull();
+        }
+
         [Fact(DisplayName = "RemoveLast_Should_Decrement_Count_By_One")]
         public void RemoveLast_Should_Decrement_Count_By_One()
         {
@@ -165,7 +229,7 @@ namespace Problems.MergeLists
             linkedList.Head.Next.Should().BeNull();
         }
 
-        [Fact(DisplayName = "RemoveFirst_Shoud_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node")]
+        [Fact(DisplayName = "RemoveFirst_Should_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node")]
         public void RemoveFirst_Should_Set_Head_And_Tail_Null_When_List_Has_Only_One_Node()
         {
             linkedList.Append(1);
@@ -176,6 +240,16 @@ namespace Problems.MergeLists
             removedNode.Data.Should().Be(1);
             linkedList.Head.Should().BeNull();
             linkedList.Tail.Should().BeSameAs(linkedList.Head);
+        }
+
+        [Fact(DisplayName = "RemoveFirst_Should_Return_Null_When_List_Is_Empty")]
+        public void RemoveFirst_Should_Return_Null_When_List_Is_Empty()
+        {
+            var removedNode = linkedList.RemoveFirst();
+
+            removedNode.Should().BeNull();
+            linkedList.Head.Should().BeNull();
+            linkedList.Tail.Should().BeNull();
         }
 
         [Fact(DisplayName = "RemoveFirst_Should_Decrement_Count_By_One")]
