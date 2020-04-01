@@ -69,7 +69,7 @@ namespace Problems.MergeLists
             {
                 lastNode = Tail;
                 Head = Tail = null;
-
+                Count--;
                 return lastNode;
             }
             

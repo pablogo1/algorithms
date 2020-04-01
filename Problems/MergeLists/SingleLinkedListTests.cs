@@ -262,5 +262,14 @@ namespace Problems.MergeLists
 
             linkedList.Count.Should().Be(1);
         }
+
+        [Fact(DisplayName = "Append_And_RemoveLast_Should_Set_Count_To_Zero")]
+        public void Append_And_RemoveLast_Should_Set_Count_To_Zero()
+        {
+            linkedList.Append(1);
+            linkedList.RemoveLast();
+
+            linkedList.Count.Should().Be(0);
+        }
     }
 }
