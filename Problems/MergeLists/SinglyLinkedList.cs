@@ -69,17 +69,17 @@ namespace Problems.MergeLists
             {
                 lastNode = Tail;
                 Head = Tail = null;
-                Count--;
-                return lastNode;
             }
-            
-            var currentNode = Head;
-            
-            while (currentNode?.Next?.Next != null) currentNode = currentNode.Next;
+            else
+            {
+                var currentNode = Head;
 
-            lastNode = Tail;
-            Tail = currentNode;
-            Tail.Next = null;
+                while (currentNode?.Next?.Next != null) currentNode = currentNode.Next;
+
+                lastNode = Tail;
+                Tail = currentNode;
+                Tail.Next = null;
+            }
 
             Count--;
 
